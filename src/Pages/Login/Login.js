@@ -1,22 +1,36 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const Login = () => {
      
-    const {signIn}=useContext(AuthContext)
+    const {signIn,user}=useContext(AuthContext)
+    const navigate=useNavigate()
     const handleLogin=(e)=>{
         e.preventDefault();
         const form=e.target 
         const email=form.email.value 
         const password=form.password.value 
-         
+        
+        
         signIn(email,password)
         .then(result=>{
             const user=result.user
             console.log(user);
+            form.reset()
+            if(user?.emailVerified){
+                toast.success('successfully login')
+                navigate('/')
+          }
+          else{
+            toast.error('please verify your email, before sign in')
+          }
+            
+           
+            
         })
-        .catch(error=>console.error(error.message))
+        .catch(error=>toast.error(error.message))
     }
     return (
         <div className="hero w-full my-20">
