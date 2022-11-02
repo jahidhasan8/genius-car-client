@@ -10,12 +10,14 @@ export const AuthContext=createContext()
 
     //  sign up new user
      const createUser=(email,password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
      }
 
     //  sign in user
 
     const signIn=(email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
      
