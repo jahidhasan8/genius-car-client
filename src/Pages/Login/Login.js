@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const Login = () => {
      
     const {signIn,user}=useContext(AuthContext)
+    const location=useLocation()
+    const from=location.state?.from.pathname || '/'
     const navigate=useNavigate()
     const handleLogin=(e)=>{
         e.preventDefault();
@@ -21,7 +23,7 @@ const Login = () => {
             form.reset()
             if(user?.emailVerified){
                 toast.success('successfully login')
-                navigate('/')
+                navigate(from,{replace:true})
           }
           else{
             toast.error('please verify your email, before sign in')
