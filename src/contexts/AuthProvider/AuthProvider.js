@@ -23,6 +23,7 @@ export const AuthContext=createContext()
      
     // log out user
    const logOut=()=>{
+    localStorage.removeItem('genius-token');
     return signOut(auth)
    }
       
