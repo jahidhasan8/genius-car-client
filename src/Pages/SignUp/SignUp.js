@@ -6,6 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import { setAuthToken } from '../../api/auth';
+
 
 const SignUp = () => {
       
@@ -26,6 +28,7 @@ const SignUp = () => {
              console.log(user);
              handleVerify()
              form.reset()
+             setAuthToken(user)
         })
         .catch(error=>toast.error(error.message))
     }

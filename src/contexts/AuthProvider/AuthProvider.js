@@ -27,7 +27,7 @@ export const AuthContext=createContext()
     return signOut(auth)
    }
       
-    // google sign in
+    // google/github sign in
     const popUpSignIn=(googleProvider)=>{
         return signInWithPopup(auth, googleProvider)
     }
